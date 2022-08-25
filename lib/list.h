@@ -1,11 +1,19 @@
+#include <stdlib.h>
 #ifndef _LIST_H_
 #include <stddef.h>
+// Magic macro.
+#define INT_VALUE(x) *(int*)x
+#define DOUBLE_VALUE(x) *(double*)x
+#define FLOAT_VALUE(x) *(float*)x
+
 
 typedef struct ListNode ListNode;
 struct ListNode {
     void* data;
     ListNode* next;
 };
+
+void listnode_free(ListNode* node);
 
 typedef struct List List;
 struct List {
@@ -15,9 +23,9 @@ struct List {
     ListNode* tail;
 };
 // new list.
-List* list_new();
+List* list_new(size_t member_size);
 // new list with init data.
-List* list_new_with(size_t memberSize, void* data);
+List* list_new_with(size_t member_size, void* data);
 // free list.
 void list_free(List* list);
 
